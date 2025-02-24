@@ -1,6 +1,7 @@
 package com.capgemini.address_book.service.impl;
 
 import com.capgemini.address_book.dto.AddressBookDto;
+import com.capgemini.address_book.dto.AddressBookDtoMapper;
 import com.capgemini.address_book.model.AddressBook;
 import com.capgemini.address_book.repository.AddressBookRepository;
 import com.capgemini.address_book.service.IAddressBookService;
@@ -21,21 +22,25 @@ public class AddressBookServiceImpl implements IAddressBookService {
 
     @Override
     public AddressBookDto addAddressBook(AddressBook addressBook) {
-        return null;
+        AddressBook addedAddressBook = addressBookRepository.save(addressBook);
+        return AddressBookDtoMapper.mapToAddressBookDto(addedAddressBook);
     }
 
     @Override
     public AddressBookDto getAddressBookById(Long id) {
-        return null;
+        AddressBook addressBook = addressBookRepository.findById(id).orElseThrow();
+        return AddressBookDtoMapper.mapToAddressBookDto(addressBook);
     }
 
     @Override
     public AddressBookDto patchAddressBook(AddressBook addressBook) {
-        return null;
+        AddressBook updatedAddressBook = addressBookRepository.save(addressBook);
+        return AddressBookDtoMapper.mapToAddressBookDto(updatedAddressBook);
     }
 
     @Override
     public boolean deleteAddressBookById(Long id) {
-        return false;
+        addressBookRepository.deleteById(id);
+        return true;
     }
 }
