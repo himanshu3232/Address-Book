@@ -1,6 +1,7 @@
 package com.capgemini.address_book.controller;
 
 import com.capgemini.address_book.dto.AddressBookDto;
+import com.capgemini.address_book.exception.InvalidRequestBodyException;
 import com.capgemini.address_book.model.AddressBook;
 import com.capgemini.address_book.service.IAddressBookService;
 import jakarta.validation.Valid;
@@ -37,6 +38,7 @@ public class AddressBookController {
             for(ObjectError error : bindingResult.getAllErrors()){
                 log.warn(error.getDefaultMessage());
             }
+            throw new InvalidRequestBodyException("Invalid request body");
         }
         return new ResponseEntity<>(addressBookService.addAddressBook(addressBook), HttpStatus.CREATED);
     }
@@ -51,6 +53,7 @@ public class AddressBookController {
             for(ObjectError error : bindingResult.getAllErrors()){
                 log.warn(error.getDefaultMessage());
             }
+            throw new InvalidRequestBodyException("Invalid request body");
         }
         return new ResponseEntity<>(addressBookService.patchAddressBook(addressBook), HttpStatus.OK);
     }
