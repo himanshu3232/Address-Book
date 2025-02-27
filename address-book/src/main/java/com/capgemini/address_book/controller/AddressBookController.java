@@ -3,19 +3,17 @@ package com.capgemini.address_book.controller;
 import com.capgemini.address_book.dto.AddressBookDto;
 import com.capgemini.address_book.model.AddressBook;
 import com.capgemini.address_book.service.IAddressBookService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/address-book")
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AddressBookController {
 
-    private IAddressBookService addressBookService;
+    private final IAddressBookService addressBookService;
 
     @GetMapping("/get/{id}")
     public ResponseEntity<AddressBookDto> getAddressBook(@PathVariable Long id){
