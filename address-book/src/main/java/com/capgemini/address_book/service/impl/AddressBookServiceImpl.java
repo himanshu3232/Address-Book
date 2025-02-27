@@ -42,7 +42,7 @@ public class AddressBookServiceImpl implements IAddressBookService {
 
     @Override
     public boolean deleteAddressBookById(Long id) {
-        
+        log.debug("AddressBook with id: {} removed from database", id);
         addressBookRepository.deleteById(id);
         return true;
     }
